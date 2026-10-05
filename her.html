@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesan Khusus Buat maba unisba</title>
+
+    <!-- Google Font Imut 'Fredoka' -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Fredoka', sans-serif;
+            background-color: #ffe5ec; /* Pink Pastel Solid */
+            color: #5c3d46;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* ------------------------------------------
+           1. WELCOME SCREEN (LAYAR AWAL)
+           ------------------------------------------ */
+        #welcomeScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffe5ec;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            padding: 20px;
+            transition: all 0.5s ease;
+        }
+
+        .welcome-card {
+            background-color: #fff0f3;
+            border: 4px solid #ffb3c1;
+            border-radius: 30px;
+            padding: 35px 25px;
+            max-width: 350px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 0px #ffb3c1;
+        }
+
+        .welcome-emoji {
+            font-size: 60px;
+            margin-bottom: 15px;
+            display: inline-block;
+            animation: mentulMentul 1.5s infinite ease-in-out;
+        }
+
+        @keyframes mentulMentul {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-12px) scale(1.1); }
+        }
+
+        .welcome-card h2 {
+            font-size: 20px;
+            color: #ff2a55;
+            margin-bottom: 10px;
+        }
+
+        .welcome-card p {
+            font-size: 13px;
+            color: #855865;
+            margin-bottom: 22px;
+        }
+
+        /* ------------------------------------------
+           2. KARTU UTAMA (BERISI FOTO & KATA-KATA)
+           ------------------------------------------ */
+        #mainCard {
+            display: none; /* Disembunyikan dulu */
+            background-color: #fff0f3;
+            border: 4px solid #ffb3c1;
+            border-radius: 30px;
+            padding: 30px 22px;
+            max-width: 380px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 0px #ffb3c1;
+            animation: munculMulus 0.6s ease-out forwards;
+        }
+
+        @keyframes munculMulus {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* CONTAINER FOTO DIA */
+        .foto-container {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 20px auto;
+        }
+
+        .foto-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid #ff4d6d;
+            background-color: #ffffff;
+        }
+
+        .badge-lucu {
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ff4d6d;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            white-space: nowrap;
+            box-shadow: 0 3px 0px #c9184a;
+        }
+
+        h1 {
+            font-size: 22px;
+            color: #ff2a55;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .pesan-utama {
+            font-size: 14px;
+            color: #6c464f;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            padding: 14px;
+            border-radius: 18px;
+            border: 2px dashed #ffb3c1;
+        }
+
+        .kotak-surat {
+            display: none;
+            background-color: #fff9db;
+            border: 3px solid #ffe066;
+            border-radius: 20px;
+            padding: 15px;
+            font-size: 13px;
+            color: #5c4813;
+            text-align: left;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 0px #ffe066;
+        }
+
+        .kotak-surat strong {
+            color: #d97706;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* ------------------------------------------
+           3. TOMBOL-TOMBOL LUCU
+           ------------------------------------------ */
+        .area-tombol {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 12px 18px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+        }
+
+        .btn-pink {
+            background-color: #ff4d6d;
+            color: #ffffff;
+            box-shadow: 0 5px 0px #c9184a;
+            width: 100%;
+        }
+
+        .btn-pink:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0px #c9184a;
+        }
+
+        .btn-biru {
+            background-color: #a2d2ff;
+            color: #1d3557;
+            box-shadow: 0 5px 0px #70a6ff;
+            width: 100%;
+        }
+
+        .btn-biru:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0px #70a6ff;
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: #a37982;
+            margin-top: 10px;
+        }
+
+        /* ANIMASI BINTANG/LOVE TERBANG */
+        .emoji-fly {
+            position: fixed;
+            font-size: 26px;
+            pointer-events: none;
+            z-index: 10000;
+            animation: melayangUp 1.4s ease-out forwards;
+        }
+
+        @keyframes melayangUp {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-130px) scale(1.6) rotate(20deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. LAYAR PEMBUKA -->
+    <div id="welcomeScreen">
+        <div class="welcome-card">
+            <div class="welcome-emoji">💌</div>
+            <h2>Ada Surat Buat Kamu!</h2>
+            <p>Banyak tugas yaaa😊</p>
+            <button class="btn-pink" onclick="bukaHalamanUtama()">Klik Untuk ada something di dalemnya</button>
+        </div>
+    </div>
+
+    <!-- 2. KARTU UTAMA (MUNCUL SETELAH DIKLIK) -->
+    <div id="mainCard">
+
+        <!-- FOTO DIA -->
+        <div class="foto-container">
+            <!-- Ganti 'foto-dia.jpg' dengan nama file fotomu -->
+            <img src="Unisbray.jpeg" alt="Foto Dia">
+            <div class="badge-lucu">Semangat Maba Universitas Balad Allah </div>
+        </div>
+
+        <!-- UCAPAN JUDUL -->
+        <h1>Semangat Nugasnyeee🤪, Tsabittt! ✨</h1>
+
+        <!-- PESAN UTAMA -->
+        <p class="pesan-utama">
+            Hayooo banyak tugass yee wkwk jangan nangis kalo kebanyakan tugasnya ini kan pilihan kamu pengen ke unisba jadi intinya jangan nyerah yaa udh di kasih bonus juga kok sama negara:v
+        </p>
+
+        <!-- KOTAK SURAT RAHASIA -->
+        <div id="kotakSurat" class="kotak-surat">
+            <strong>💌 Surat Kecil Buat Kamu:</strong>
+            <p>
+                Kalau harimu lagi kerasa berat, ingat ya ada aku yang selalu bangga sama kamu. Jangan dipaksain kalau capek, rehat sebentar yuk! I'm always here for you, unconditionally. 🌷✨
+            </p>
+        </div>
+
+        <!-- TOMBOL INTERAKTIF -->
+        <div class="area-tombol">
+            <button class="btn-pink" onclick="mintaPeluk()">Tombol Emoji Semangat 🫂</button>
+            <button class="btn-biru" id="btnSurat" onclick="bukaSurat()">Buka Surat Rahasia 💌</button>
+        </div>
+
+        <p class="footer-text">INGET BARU SEMESTER 1:)</p>
+
+    </div>
+
+    <!-- 3. JAVASCRIPT -->
+    <script>
+        // FUNGSI BUKA HALAMAN UTAMA
+        function bukaHalamanUtama() {
+            // Sembunyikan Layar Awal
+            document.getElementById("welcomeScreen").style.display = "none";
+            
+            // Tampilkan Kartu Utama
+            document.getElementById("mainCard").style.display = "block";
+
+            // Munculkan Efek Love Terbang
+            mintaPeluk();
+        }
+
+        // FUNGSI SURAT RAHASIA
+        function bukaSurat() {
+            var surat = document.getElementById("kotakSurat");
+            var btn = document.getElementById("btnSurat");
+
+            if (surat.style.display === "block") {
+                surat.style.display = "none";
+                btn.innerText = "Buka Surat Rahasia 💌";
+            } else {
+                surat.style.display = "block";
+                btn.innerText = "Tutup Surat Rahasia 🙈";
+            }
+        }
+
+        // FUNGSI EFEK LOVE & EMOJI MELAYANG
+        function mintaPeluk() {
+            const listEmoji = ['🙌🏻', '🫂', '🤪', '✨', '🧸', '🔥'];
+            
+            for (let i = 0; i < 8; i++) {
+                const item = document.createElement('div');
+                item.className = 'emoji-fly';
+                item.innerText = listEmoji[Math.floor(Math.random() * listEmoji.length)];
+                
+                // Sebar di sekitar tengah layar
+                const x = (window.innerWidth / 2) + (Math.random() - 0.5) * 200;
+                const y = (window.innerHeight / 2) + (Math.random() - 0.5) * 100;
+                
+                item.style.left = x + 'px';
+                item.style.top = y + 'px';
+                
+                document.body.appendChild(item);
+                
+                setTimeout(() => {
+                    item.remove();
+                }, 1400);
+            }
+        }
+    </script>
+
+</body>
+</html>
